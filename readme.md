@@ -5,7 +5,7 @@ The RYGB chromatic model is based on the [opponent process color theory](https:/
 
 <br>
 
-<p align="center"><img height="300px" src="./images/rygb-diagram.svg" /></p>
+<p align="center"><img height="300px" src="https://raw.githubusercontent.com/paintparty/rygb-js/master/images/rygb-diagram.svg?sanitize=true" /></p>
 
 &nbsp;
 <br>
