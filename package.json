@@ -1,0 +1,61 @@
+{
+  "name": "rygb",
+  "version": "0.1.0",
+  "description": "A simple grammar for specifying color",
+  "repository": {
+    "type": "git",
+    "url": "github.com/paintparty/rygb-js"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "echo \"Linting...\" && eslint --ext .js lib/",
+    "test": "ava"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
+  },
+  "eslintIgnore": ["test/*.js"],
+  "keywords": [
+    "color",
+    "colour",
+    "color notation",
+    "colour notation",
+    "color selection",
+    "colour selection",
+    "color picking",
+    "colour picking",
+    "color mixing",
+    "colour mixing",
+    "color theory",
+    "colour theory",
+    "opponent process",
+    "opponent colors",
+    "Ewald Hering",
+    "rygb",
+    "red",
+    "yellow",
+    "green",
+    "blue",
+    "rgb",
+    "rgba",
+    "hsv",
+    "hsva",
+    "hsb",
+    "hsba",
+    "css",
+    "style",
+    "simple",
+    "easy",
+    "live coding",
+    "live preview"
+  ],
+  "author": "JC",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "eslint": "^6.0.0",
+    "esm": "^3.2.25"
+  }
+}

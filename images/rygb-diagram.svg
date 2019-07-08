@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300px" height="300px">
+  <defs>
+    <linearGradient id="rg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="red"/>
+      <stop offset="100%" stop-color="#00ff00"/>
+    </linearGradient>
+    <linearGradient id="yb" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="yellow"/>
+      <stop offset="100%" stop-color="blue"/>
+    </linearGradient>
+  </defs>
+ <rect width="4" height="100%" fill="url(#rg)" x="150" y="0" transform="translate(-2, 0)"></rect>
+ <rect width="4" height="100%" fill="url(#yb)" x="150" y="0" transform="translate(-2, 0) rotate(90, 150, 150)"></rect>
+ <text x="80%" y="20%" transform="translate(-20, 0)">{r, y}</text>
+ <text x="80%" y="80%" transform="translate(-20, 5)">{y, g}</text>
+ <text x="20%" y="80%" transform="translate(-20, 5)">{g, b}</text>
+ <text x="20%" y="20%" transform="translate(-20, 0)">{b, r}</text>
+</svg>
