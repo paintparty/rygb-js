@@ -128,12 +128,48 @@ rygb('v20').css()  // 'rgba(51, 51, 51, 1)' ← jet
 <br>
 
 ## API ##
+First, a quick overview by example:
+```javascript
+rygb("gb-s21-v83").hex() // '#a7d4d4' 
+
+rygb("gb-s21-v83").hexa() // '#a7d4d4ff'
+
+rygb("gb-s21-v83").int24() // 10998739 
+
+rygb("gb-s21-v83").rgb().dec() // [ 0.6557, 0.83, 0.83 ] 
+
+rygb("gb-s21-v83").rgb().bit() // [ 167, 212, 212 ] 
+
+rygb("gb-s21-v83").rgb().css() // 'rgb(167, 212, 212)' 
+
+rygb("gb-s21-v83").rgba().dec() // [ 0.6557, 0.83, 0.83, 1 ] 
+
+rygb("gb-s21-v83").rgba().bit() // [ 167, 212, 212, 255 ] 
+
+rygb("gb-s21-v83").rgba().css() // 'rgba(167, 212, 212, 1)' 
+
+rygb("gb-s21-v83").argb().dec() // [ 1, 0.6557, 0.83, 0.83 ] 
+
+rygb("gb-s21-v83").argb().bit() // [ 255, 167, 212, 212]
+
+rygb("gb-s21-v83").json() // {h: {g: 1, b: 1}, s: 0.21, v: 0.83} 
+
+const obj = {
+  h: { g: 1, b: 1 },
+  s: 0.21,
+  v: 0.83
+}
+rygb(obj).str() // 'gb-s21-v83' 
+```
+
+### Parser
+
 The `rygb` parser will accept either a string or an object literal. When passing an object, the `h` property represents the hue, and must be an object. This hue object can contain either one or two keys:
 ```javascript
-// 'g2b5-s31-v47-a88'
+// Equivalent to 'g2b5-s31-v47-a88'
 rygb({h: {g: 2, b: 5}, s: 31, v: 47, a: 88})
 
-// 'r'
+// Equivalent to 'r'
 rygb({h: {r: 1}})
 ```
 
@@ -141,50 +177,76 @@ rygb({h: {r: 1}})
 ### Serialization methods
 
 
-`.css()` is a perhaps the most immediately useful method when using RYGB notation for rapid prototyping and design.
+`.hex()` is a perhaps the most immediately useful method when using RYGB notation for rapid prototyping and design.
 
 ```javascript
-rygb('yg').css()  // 'rgba(128, 255, 0, 1)'
+rygb('yg').hex()  // '#80ff00'
 ```
 
 <br>
 
-The `.css()` method above is also available as `.rgba().css()`.
+`.hexa()` will give you hex code with alpha-channel information (supported in some browsers).
+
 ```javascript
-rygb('yg').rgba().css()  // 'rgba(128, 255, 0, 1)'
+rygb('yg-a88').hex()  // '#80ff00e0'
 ```
 
 <br>
 
-To return an array of red, green, blue, and alpha values:
+
+rgb, rgba, and argb tuples with values as decimal fractions `[0-1]`:
 ```javascript
-rygb('yg').rgba().toArray()  // [128, 255, 0, 1]
+rygb('g2b3-s31-v47').rgb().dec()  // [0.3243, 0.44086, 0.47, 1]
+rygb('g2b3-s31-v47').rgba().dec()  // [0.3243, 0.44086, 0.47, 1]
+rygb('g2b3-s31-v47').argb().dec()  // [1, 0.3243, 0.44086, 0.47]
 ```
 
 <br>
 
-Red, green, and blue values are, by default, normalized to `[0-255]` (byte). Decimal values `[0-1]` can optionally be returned :
+Or with 8-bit unsigned integers`[0-255]`:
 ```javascript
-rygb('g2b5-s31-v47').rgba().toArray({decimal: true})  // [0.881167, 0.69, 1, 1]
+rygb('g2b3-s31-v47').rgb().bit()  // [83, 112, 120]
+rygb('g2b3-s31-v47').rgba().bit()  // [83, 112, 120, 255]
+rygb('g2b3-s31-v47').argb().bit()  // [255, 83, 112, 120]
+```
+
+<br>
+
+A packed integer representing an rgb color:
+```javascript
+rygb('g2b3-s31-v47').int24()  // 5402743
 ```
 
 <br>
 
 Turn a JSON representation into RYGB string notation:
 ```javascript
-rygb({h: {g: 2, b: 5}, s: 31, v: 47}).toString()  // 'g2b5-s31-v47'
+rygb({h: {g: 2, b: 3}, s: 31, v: 47}).toString()  // 'g2b3-s31-v47'
 ```
 
 <br>
 
 Turn RYGB notation into a JSON representation:
 ```javascript
-rygb('g2b5-s31-v47').toJSON()  // '{h: {g: 2, b: 5}, s: 31, v: 47}'
+rygb('g2b3-s31-v47').toJSON()  // '{h: {g: 2, b: 3}, s: 31, v: 47}'
 ```
 
 <br>
 
 ## Usage with other tools ##
+
+`rygb` will work with almost any JS graphics library or framework whose constructors and/or color methods accept hex codes or css color strings. Most of them do.
+
+In some scenarios, it may be desirable to make us of an rgb(a) tuple, or even a packed integer. For example, the .int24() method works nicely for helping to defining a color in [three.js](https://threejs.org/docs/#api/en/math/Color), as recommended in their [docs](https://threejs.org/docs/#api/en/math/Color)
+```javascript
+import * as THREE from "three";
+import rygb from 'rygb';
+
+var color = new THREE.Color( rygb('g2b3-s31-v47').int24() );
+```
+<br>
+
+
 Although color conversions and manipulations are outside the scope of this utility, `rygb` can be used to supply parsable input to other packages that provide a vast array of such functionality. Popular, well-supported JavaScript color libraries include [color](https://github.com/Qix-/color), [one-color](https://github.com/One-com/one-color), [chroma.js](https://github.com/gka/chroma.js/), and [TinyColor](https://github.com/bgrins/TinyColor).
 
 <br>
