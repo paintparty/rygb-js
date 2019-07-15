@@ -10,7 +10,7 @@ The RYGB chromatic model is based on the [opponent process color theory](https:/
 &nbsp;
 <br>
 
-Any desired hue can be expressed by determining the appropriate pair, then mixing the two associated primaries in relative parts. For example, the notation `'r2y3'` results in a yellowish-orange hue that is exactly 2 parts red and 3 parts yellow.
+Any desired hue can be expressed by determining the appropriate pair, then mixing the two associated primaries in relative parts. For example, the notation `'r2y3'` results in a reddish-yellow hue that is exactly 2 parts red and 3 parts yellow.
 
 RYGB was created for coding-centric design/development workflows. It is intended for rapid prototyping, graphic design, illustration, animation, and scenarios when experimental color choices may happen frequently. In such cases, the repeated context-switching inherent with the use of traditional GUI color-selection tools may be both cumbersome and undesirable.
 
@@ -107,21 +107,21 @@ rygb('v50').hex()  // '#808080' ← 50% gray
 More examples with various colors:
 
 ```javascript
-rygb('gb-s21-v83').hex()  // 'rgba(167, 212, 212, 1)' ← robin's egg blue
+rygb('gb-s21-v83').hex()  // '#a7d4d4' ← robin's egg blue
 
-rygb('g2b5-s31-v47').hex()  // 'rgba(83, 104, 120, 1)' ← payne's gray
+rygb('g2b5-s31-v47').hex()  // '#536878' ← payne's gray
 
-rygb('g21b1-s24-v88').hex()  // 'rgba(171, 224, 175, 1)' ← celadon
+rygb('g21b1-s24-v88').hex()  // '#abe0af' ← celadon
 
-rygb('r1y3-s80-v96').hex()  // 'rgba(245, 196, 49, 1)' ← saffron
+rygb('r1y3-s80-v96').hex()  // '#f5c431' ← saffron
 
-rygb('b9r4-s31').hex()  // 'rgba(225, 176, 255, 1)' ← mauve
+rygb('b9r4-s31').hex()  // '#e1b0ff' ← mauve
 
-rygb('yg').hex()  // 'rgba(128, 255, 0, 1) ← chartreuse
+rygb('yg').hex()  // '#80ff00' ← chartreuse
 
-rygb('y-s6').hex()  // 'rgba(130, 109, 49, 1)' ← ivory
+rygb('y-s6').hex()  // '#fffff0' ← ivory
 
-rygb('v20').hex()  // 'rgba(51, 51, 51, 1)' ← jet
+rygb('v20').hex()  // '#333333' ← jet
 ```
 <br>
 <br>
@@ -129,44 +129,44 @@ rygb('v20').hex()  // 'rgba(51, 51, 51, 1)' ← jet
 ## API ##
 First, a quick overview by example:
 ```javascript
-rygb("gb-s21-v83").hex() // '#a7d4d4' 
+rygb('gb-s21-v83').hex() // '#a7d4d4' 
 
-rygb("gb-s21-v83").hexa() // '#a7d4d4ff'
+rygb('gb-s21-v83').hexa() // '#a7d4d4ff'
 
-rygb("gb-s21-v83").int24() // 10998739 
+rygb('gb-s21-v83').int24() // 10998739 
 
-rygb("gb-s21-v83").rgb().dec() // [ 0.6557, 0.83, 0.83 ] 
+rygb('gb-s21-v83').rgb().dec() // [ 0.6557, 0.83, 0.83 ] 
 
-rygb("gb-s21-v83").rgb().bit() // [ 167, 212, 212 ] 
+rygb('gb-s21-v83').rgb().bit() // [ 167, 212, 212 ] 
 
-rygb("gb-s21-v83").rgb().css() // 'rgb(167, 212, 212)' 
+rygb('gb-s21-v83').rgb().css() // 'rgb(167, 212, 212)' 
 
-rygb("gb-s21-v83").rgba().dec() // [ 0.6557, 0.83, 0.83, 1 ] 
+rygb('gb-s21-v83').rgba().dec() // [ 0.6557, 0.83, 0.83, 1 ] 
 
-rygb("gb-s21-v83").rgba().bit() // [ 167, 212, 212, 255 ] 
+rygb('gb-s21-v83').rgba().bit() // [ 167, 212, 212, 255 ] 
 
-rygb("gb-s21-v83").rgba().css() // 'rgba(167, 212, 212, 1)' 
+rygb('gb-s21-v83').rgba().css() // 'rgba(167, 212, 212, 1)' 
 
-rygb("gb-s21-v83").argb().dec() // [ 1, 0.6557, 0.83, 0.83 ] 
+rygb('gb-s21-v83').argb().dec() // [ 1, 0.6557, 0.83, 0.83 ] 
 
-rygb("gb-s21-v83").argb().bit() // [ 255, 167, 212, 212]
+rygb('gb-s21-v83').argb().bit() // [ 255, 167, 212, 212]
 
-rygb("gb-s21-v83").json() // {h: {g: 1, b: 1}, s: 0.21, v: 0.83} 
+rygb('gb-s21-v83').json() // {h: {g: 1, b: 1}, s: 0.21, v: 0.83} 
 
 const obj = {
   h: { g: 1, b: 1 },
   s: 0.21,
   v: 0.83
 }
-rygb(obj).str() // 'gb-s21-v83' 
+rygb(obj).string() // 'gb-s21-v83' 
 ```
 
 ### Parser
 
-The `rygb` parser will accept either a string or an object literal. When passing an object, the `h` property represents the hue, and must be an object with either one or two keys:
+The `rygb` parser will accept either a string or an object literal. When passing an object, the `h` property represents the hue, and must be an object with either one or two keys. Unlike the string notation, the `s`, `v`, and `a` values in the object notation must be decimal fractions `[0-1]`:
 ```javascript
 // Equivalent to 'g2b5-s31-v47-a88'
-rygb({h: {g: 2, b: 5}, s: 31, v: 47, a: 88})
+rygb({h: {g: 2, b: 5}, s: 0.31, v: 0.47, a: 0.88})
 
 // Equivalent to 'r'
 rygb({h: {r: 1}})
@@ -195,7 +195,7 @@ rygb('yg-a88').hex()  // '#80ff00e0'
 
 rgb, rgba, and argb tuples with values as decimal fractions `[0-1]`:
 ```javascript
-rygb('g2b3-s31-v47').rgb().dec()  // [0.3243, 0.44086, 0.47, 1]
+rygb('g2b3-s31-v47').rgb().dec()  // [0.3243, 0.44086, 0.47]
 rygb('g2b3-s31-v47').rgba().dec()  // [0.3243, 0.44086, 0.47, 1]
 rygb('g2b3-s31-v47').argb().dec()  // [1, 0.3243, 0.44086, 0.47]
 ```
@@ -220,7 +220,7 @@ rygb('g2b3-s31-v47').int24()  // 5402743
 
 Turn a JSON representation into RYGB string notation:
 ```javascript
-rygb({h: {g: 2, b: 3}, s: 31, v: 47}).str()  // 'g2b3-s31-v47'
+rygb({h: {g: 2, b: 3}, s: 31, v: 47}).string()  // 'g2b3-s31-v47'
 ```
 
 <br>
@@ -234,11 +234,11 @@ rygb('g2b3-s31-v47').json()  // '{h: {g: 2, b: 3}, s: 31, v: 47}'
 
 ## Usage with other tools ##
 
-`rygb` will work with almost any JS graphics library or framework whose constructors and/or color methods accept hex codes or css color strings. Most of them do.
+`rygb` will work with almost any JS library or framework whose constructors and/or color methods accept hex codes or css color strings. Most of them do.
 
 In some scenarios, it may be desirable to make use of an rgb(a) tuple, or even a packed integer. For example, the .int24() method works nicely for [defining a color as recommended in three.js](https://threejs.org/docs/#api/en/math/Color):
 ```javascript
-import * as THREE from "three";
+import * as THREE from 'three';
 import rygb from 'rygb';
 
 var color = new THREE.Color( rygb('g2b3-s31-v47').int24() );
